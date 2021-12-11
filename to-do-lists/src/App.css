@@ -34,6 +34,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  /* dp-display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); */
 }
 
 .App-link {

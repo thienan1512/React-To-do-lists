@@ -1,7 +1,7 @@
 import React from "react";
 class Todo extends React.Component {
   render(props) {
-    let header = "";
+    
     if (this.props.done) {
       return (
         <div>

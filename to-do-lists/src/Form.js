@@ -1,10 +1,8 @@
 import React from "react";
 import "./App.css";
 import Todo from "./Todo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
- import { ToastContainer, toast } from "react-toastify";
- import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -19,14 +17,14 @@ class Form extends React.Component {
       },
     };
   }
-
- showToast=(content) => {
-  toast.success(content,{
-    position: toast.POSITION.BOTTOM_RIGHT,
-    theme: "dark",
-    autoClose : "5000"
-  });
- }
+//Toast
+  showToast = (content) => {
+    toast.success(content, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      theme: "dark",
+      autoClose: "5000",
+    });
+  };
   handleTasks = (event) => {
     this.setState({ task: event.target.value });
   };
@@ -34,29 +32,29 @@ class Form extends React.Component {
     console.log(this.state.tasksList);
     const id = this.state.tasksList.length;
     const name = this.state.task;
-    this.state.tasksList.push({id, name , done: false});
+    this.state.tasksList.push({ id, name, done: false });
     this.setState({ task: "" });
     this.showToast("Add into your list successfully");
   };
-  deleteTask=(id)=>{
-    console.log("Before Delete",this.state.tasksList);
+  deleteTask = (id) => {
+    console.log("Before Delete", this.state.tasksList);
     const tasksList = this.state.tasksList.filter((task) => task.id !== id);
     if (tasksList === null) {
       this.setState({ tasksList: [] });
     }
-    this.setState({tasksList});
-    console.log("After Delete",this.state.tasksList);
+    this.setState({ tasksList });
+    console.log("After Delete", this.state.tasksList);
     this.showToast("Delete your list successfully");
-  }
-  completeTask=(id)=>{
-    this.state.tasksList.forEach(e=>{
-      if(e.id===id){
-        e.done =true;
+  };
+  completeTask = (id) => {
+    this.state.tasksList.forEach((e) => {
+      if (e.id === id) {
+        e.done = true;
       }
       console.log(e);
-      this.setState({e});
-    })
-  }
+      this.setState({ e });
+    });
+  };
   render() {
     return (
       <div style={this.state.myStyle}>
@@ -82,7 +80,6 @@ class Form extends React.Component {
           ))}
         </ul>
         <ToastContainer position="top-right" />
-        
       </div>
     );
   }

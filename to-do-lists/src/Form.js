@@ -2,7 +2,9 @@ import React from "react";
 import "./App.css";
 import Todo from "./Todo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+ import { ToastContainer, toast } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -10,15 +12,21 @@ class Form extends React.Component {
       tasksList: [],
       task: "",
       myStyle: {
-        display: "inline-block",
-        position: "relative",
-        left: "50%",
-        transform: "translateX(-50%)"
+        // display: "inline-block",
+        // position: "relative",
+        // left: "50%",
+        // transform: "translateX(-50%)"
       },
     };
   }
 
- 
+ showToast=(content) => {
+  toast.success(content,{
+    position: toast.POSITION.BOTTOM_RIGHT,
+    theme: "dark",
+    autoClose : "5000"
+  });
+ }
   handleTasks = (event) => {
     this.setState({ task: event.target.value });
   };
@@ -28,6 +36,7 @@ class Form extends React.Component {
     const name = this.state.task;
     this.state.tasksList.push({id, name , done: false});
     this.setState({ task: "" });
+    this.showToast("Add into your list successfully");
   };
   deleteTask=(id)=>{
     console.log("Before Delete",this.state.tasksList);
@@ -37,6 +46,7 @@ class Form extends React.Component {
     }
     this.setState({tasksList});
     console.log("After Delete",this.state.tasksList);
+    this.showToast("Delete your list successfully");
   }
   completeTask=(id)=>{
     this.state.tasksList.forEach(e=>{
@@ -71,6 +81,8 @@ class Form extends React.Component {
             />
           ))}
         </ul>
+        <ToastContainer position="top-right" />
+        
       </div>
     );
   }

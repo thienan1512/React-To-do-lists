@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Todo from "./Todo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
 class Form extends React.Component {
@@ -17,33 +18,35 @@ class Form extends React.Component {
     };
   }
 
-  displayTasks(props) {
-    return (
-      <>
-        <h3>
-          <button>
-            <i className="fa fa-check" style={{ color: "green" }}></i>
-          </button>
-          <button>
-            <i className="fa fa-trash" style={{ color: "red" }}></i>
-          </button>
-          {props.task}
-        </h3>
-      </>
-    );
-  }
-  
+ 
   handleTasks = (event) => {
     this.setState({ task: event.target.value });
   };
   addTask = () => {
     console.log(this.state.tasksList);
-    this.state.tasksList.push(this.state.task);
+    const id = this.state.tasksList.length;
+    const name = this.state.task;
+    this.state.tasksList.push({id, name , done: false});
     this.setState({ task: "" });
   };
-  // deleteTask=()=>{
-  //   console.log("delete");
-  // }
+  deleteTask=(id)=>{
+    console.log("Before Delete",this.state.tasksList);
+    const tasksList = this.state.tasksList.filter((task) => task.id !== id);
+    if (tasksList === null) {
+      this.setState({ tasksList: [] });
+    }
+    this.setState({tasksList});
+    console.log("After Delete",this.state.tasksList);
+  }
+  completeTask=(id)=>{
+    this.state.tasksList.forEach(e=>{
+      if(e.id===id){
+        e.done =true;
+      }
+      console.log(e);
+      this.setState({e});
+    })
+  }
   render() {
     return (
       <div style={this.state.myStyle}>
@@ -59,7 +62,13 @@ class Form extends React.Component {
         <input type="button" value="Submit" onClick={this.addTask} />
         <ul>
           {this.state.tasksList.map((task) => (
-            <this.displayTasks task={task} />
+            <Todo
+              task={task.name}
+              done={task.done}
+              deleteTask={this.deleteTask}
+              completeTask={this.completeTask}
+              id={task.id}
+            />
           ))}
         </ul>
       </div>

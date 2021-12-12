@@ -52,3 +52,8 @@
     transform: rotate(360deg);
   }
 }
+.done{
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}

@@ -7,14 +7,10 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title:props.title,
       tasksList: [],
       task: "",
-      myStyle: {
-        // display: "inline-block",
-        // position: "relative",
-        // left: "50%",
-        // transform: "translateX(-50%)"
-      },
+      
     };
   }
 //Toast
@@ -57,17 +53,17 @@ class Form extends React.Component {
   };
   render() {
     return (
-      <div style={this.state.myStyle}>
-        <h3>To do Lists</h3>
+      <div className="form-group">
+        <label>{this.state.title}</label>
         <input
           type="text"
-          className="Form-control"
+          className="form-control"
           placeholder="Enter for a new Task"
           value={this.state.task}
           name="task"
           onChange={this.handleTasks}
         />
-        <input type="button" value="Submit" onClick={this.addTask} />
+        <input type="button" value="Submit" onClick={this.addTask} className="btn btn-primary"  />
         <ul>
           {this.state.tasksList.map((task) => (
             <Todo
